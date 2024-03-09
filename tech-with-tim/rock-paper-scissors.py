@@ -23,7 +23,7 @@ Select an option (1, 2, or 3): """
 
 user_choice = 0
 
-initial_choice_message = f"Hey {name}, {ingame_choice_message}"
+initial_choice_message = f"\nHey {name}, {ingame_choice_message}"
 
 user_choice = int(input(initial_choice_message))
 
@@ -42,13 +42,29 @@ def start_game():
     else:
         computer_choice = options[random.randint(0, len(options) - 1)]
         user_choice = options[user_choice - 1]
-        print("user choice: ", user_choice)
-        print("computer choice: ", computer_choice)
 
-        if user_winning_rules[user_choice]["computer"] == computer_choice:
+        print(
+            f"""
+            user choice: {user_choice}
+        computer choice: {computer_choice}
+"""
+        )
+
+        if computer_choice == user_choice:
+            print("Its a draw!")
+        elif user_winning_rules[user_choice]["computer"] == computer_choice:
             print("You Win!")
         else:
             print("Computer Wins!")
+
+        print("\n----------------------------------\n")
+
+        final_input = input("Press r to play again, any other key to exit: ")
+        if final_input == "r":
+            restart_game()
+        else:
+            print(f"\nGame Over! Thankyou {name} for playing")
+            quit()
 
 
 start_game()
